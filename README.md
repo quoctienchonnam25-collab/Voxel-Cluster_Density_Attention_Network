@@ -1,27 +1,24 @@
-# Voxel Cluster Density Attention Network (VCDA-Net)
+# Voxel-Cluster Density Attention Network (VCDA-Net)
 
-**Brain Age Prediction with Density Attention-Enhanced Features and Gated Fusion**
+**Brain Age Prediction with Voxel-Cluster Density Attention and Multi-Edge Graph Fusion**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.10+-ee4c2c.svg)](https://pytorch.org/)
 
-## 📖 Overview
+## 📖 Abstract
 
-**VCDA-Net** (Voxel Cluster Density Attention Network) is a novel deep learning architecture for robust brain age prediction from MRI scans. It introduces a **Density Attention Map** mechanism to enhance regional feature extraction without the computational overhead of gradient-based methods (like GradCAM).
+We propose the **Voxel-Cluster Density Attention (VCDA)** mechanism to quantify neurodegeneration through spatial-density variations. Our **adaptive dual-stream system** integrates global UNet features with local VCDA graphs via a **Multi-Edge Attention** mechanism. This mechanism incorporates dot-product, Euclidean distance, and cosine similarity to prioritize diagnostic connectivity. 
 
-Key innovations:
-- **Density Attention Map**: Investigates voxel cluster density activation magnitudes to weight regional features effectively.
-- **Gated Fusion**: A dynamic mechanism to adaptively combine global features (Transformer stream) and local features (Bottleneck stream).
-- **Dual-Stream Architecture**: Synergistically processes spatial and semantic information.
-- **Regional Analysis**: Provides interpretability by predicting brain age for 32 distinct brain regions.
+By combining a Transformer with **Gated Fusion**, the model effectively captures early micro-scale changes. Furthermore, our **accelerated-aging framework** accurately identifies global and regional Brain Age Gaps (BAGs) across 32 structures, enabling quantitative stratification from Mild Cognitive Impairment (MCI) to Alzheimer's Disease (AD).
 
-## 🚀 Key Features
+## 🚀 Key Contributions
 
-- **Efficient Feature Weighting**: Uses activation magnitude-based **Density Attention Maps** (no backward pass required).
-- **Fast Training**: Significantly faster than gradient-based attention methods.
-- **Robustness**: Gated fusion adapts to individual sample characteristics.
-- **Interpretability**: Outputs both global brain age and regional age gaps.
+The main contributions of this work are:
+
+1. **VCDA Mechanism**: A novel mechanism for enhanced sensitivity to early-stage neurodegeneration by analyzing voxel density variations.
+2. **Dual-Stream Architecture**: A robust system using **Gated Fusion** and **Multi-Edge Attention** to capture complex inter-regional dependencies.
+3. **Clinical Framework**: A comprehensive framework tracking global and regional BAG across 32 structures to characterize pathological shifts in the Alzheimer's spectrum.
 
 ## 🛠️ Installation
 
@@ -89,9 +86,9 @@ print(f"Gate Value: {gate_value.item():.4f}")
 The VCDA-Net architecture consists of:
 
 1.  **3D UNet Backbone**: Extracts hierarchical features from MRI volumes.
-2.  **Density Attention Module**: Computes attention maps based on voxel activation density.
+2.  **VCDA Module**: Computes density attention maps based on voxel activation density.
 3.  **Dual Streams**:
-    *   **Transformer Stream**: Captures long-range dependencies and global context.
+    *   **Transformer Stream**: Captures long-range dependencies and global context using Multi-Edge Attention.
     *   **Bottleneck Stream**: Preserves local anatomical details.
 4.  **Gated Fusion Layer**: Dynamically balances the contribution of both streams for the final prediction.
 
@@ -109,11 +106,6 @@ vcda_net/
 ├── setup.py                # Package installation script
 └── pyproject.toml          # Project configuration
 ```
-
-## 📝 Naming Clarification
-
-**Why "Density Attention" instead of "Saliency"?**
-While technically a form of saliency map, we use the term **Density Attention** to emphasize that our method relies on the *density of voxel activations* in feature clusters, distinct from gradient-based "saliency" methods often used in visualization.
 
 ## 📄 License
 

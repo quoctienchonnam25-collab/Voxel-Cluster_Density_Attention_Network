@@ -1,0 +1,31 @@
+{
+  "n_samples": 257,
+  "n_regions": 32,
+  "age_range": [
+    8.0,
+    95.0
+  ],
+  "bias_correction": {
+    "avg_beta_0": -4.824300545504802,
+    "avg_beta_1": 1.0842596290078244,
+    "avg_r_squared": 0.7454751011590506
+  },
+  "performance_before": {
+    "mae": 9.808566139638863,
+    "bias": 0.5531745538193094
+  },
+  "performance_after": {
+    "mae": 9.635824774486776,
+    "bias": -6.423741780613261e-16
+  },
+  "ensemble_after": {
+    "average_mae": 6.296181932461806,
+    "average_bias": -4.423612362708795e-16,
+    "median_mae": 5.4025915681635,
+    "median_bias": -0.12992380166043346
+  },
+  "improvement": {
+    "mae_reduction": 0.17274136515208538,
+    "mae_reduction_pct": 1.7611275969684748
+  }
+}

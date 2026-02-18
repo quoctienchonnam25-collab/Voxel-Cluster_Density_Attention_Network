@@ -1,0 +1,38 @@
+# Model configuration
+model:
+  num_regions: 32
+  embedding_dim: 256
+  resnet_depth: resnet18
+  top_k: 512
+  sigma: 10.0
+  matrix_resize: 256
+  edge_num: 10
+  hidden_channels: 64
+  num_gnn_layers: 3
+  use_edge_attention: true
+  transformer_d_model: 256
+  transformer_nhead: 8
+  transformer_num_layers: 3
+  dropout: 0.3
+  freeze_unet: false
+
+# Training configuration
+training:
+  epochs: 300
+  batch_size: 4
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-4
+  loss_type: huber
+  early_stop: true
+  patience: 50
+  device: cuda
+
+# Data configuration
+data:
+  train_ratio: 0.7
+  val_ratio: 0.15
+  stratify: true
+  random_seed: 42
+
+# Note: This model uses activation magnitude-based saliency maps,
+# NOT gradient-based GradCAM!

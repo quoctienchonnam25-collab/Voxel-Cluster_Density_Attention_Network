@@ -1,5 +1,5 @@
 """
-Utility Functions for Saliency Map Processing
+Utility Functions for Density Attention Processing
 
 This module contains helper functions for:
 - Extracting top-K coordinates from density attention maps

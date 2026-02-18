@@ -26,8 +26,10 @@ CHECKPOINT="${PACKAGE_ROOT}/vcda_runs/vcda_net_20260216_011913/checkpoints/best_
 UNET_CHECKPOINT="${PACKAGE_ROOT}/unet_checkpoint/IXI_3dunet_best_model.pth"
 
 # Data paths (MODIFY THESE FOR YOUR DATA)
-DATA_DIR="/media/devin/WORK/devin/tien/synthesis_data/healthy_brain_1710/ABIDE_ADNI_IXI_OASIS_PPMI_Turboprep_balanced_1710"
-METADATA_CSV="/media/devin/WORK/devin/tien/synthesis_data/healthy_brain_1710/ABIDE_ADNI_IXI_OASIS_PPMI_Turboprep_balanced_1710_metadata.csv"
+# DATA_DIR="/path/to/dataset"
+# METADATA_CSV="/path/to/metadata.csv"
+DATA_DIR="${VCDA_DATA_DIR:-/path/to/dataset}"
+METADATA_CSV="${VCDA_METADATA_CSV:-/path/to/metadata.csv}"
 
 # Output directories
 OUTPUT_BASE="${PACKAGE_ROOT}/pipeline_output"
@@ -66,7 +68,7 @@ mkdir -p "$MODELS_DIR"
 
 # Activate conda environment
 echo "Activating conda environment..."
-source ~/devin/programs/anaconda3/bin/activate base
+# source ~/anaconda3/bin/activate base
 
 # Add package to PYTHONPATH
 export PYTHONPATH="${PACKAGE_ROOT}/src:${PYTHONPATH}"

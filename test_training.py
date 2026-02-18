@@ -5,6 +5,7 @@ Tests 1 epoch to verify package functionality
 """
 
 import sys
+import os
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, Dataset
@@ -81,9 +82,17 @@ def test_training():
     print("="*70)
     
     # Paths
-    data_dir = Path('/media/devin/WORK/devin/tien/synthesis_data/healthy_brain_1710/ABIDE_ADNI_IXI_OASIS_PPMI_Turboprep_balanced_1710')
-    metadata_csv = Path('/media/devin/WORK/devin/tien/synthesis_data/healthy_brain_1710/ABIDE_ADNI_IXI_OASIS_PPMI_Turboprep_balanced_1710_metadata.csv')
-    unet_checkpoint = Path('/media/devin/WORK/devin/tien/src/brain_age_prediction/vcda_net_package/src/vcda_net/checkpoints/IXI_3dunet_best_model.pth')
+    # Paths (Please update these to point to your dataset)
+    # data_dir = Path('/path/to/dataset')
+    # metadata_csv = Path('/path/to/metadata.csv')
+    
+    # Example using environment variables or default relative paths (for demo)
+    data_dir = Path(os.environ.get('VCDA_DATA_DIR', './data/sample_dataset'))
+    metadata_csv = Path(os.environ.get('VCDA_METADATA_CSV', './data/sample_metadata.csv'))
+    
+    # Checkpoint path (relative to package root is fine)
+    package_root = Path(__file__).parent
+    unet_checkpoint = package_root / 'src/vcda_net/checkpoints/IXI_3dunet_best_model.pth'
     
     # Check paths
     if not data_dir.exists():

@@ -4,8 +4,8 @@ Voxel Cluster Density Attention Network (VCDA-Net) Package
 
 Brain Age Prediction with Density Attention-Enhanced Features and Gated Fusion
 
-⚠️ IMPORTANT: This package uses SALIENCY MAPS, not GradCAM!
-   - Saliency Map: Activation magnitude-based weighting (NO gradients)
+⚠️ IMPORTANT: This package uses DENSITY ATTENTION MAPS, not GradCAM!
+   - Density Attention Map: Activation magnitude-based weighting (NO gradients)
    - GradCAM: Gradient-based weighting (requires backward pass)
 
 Our implementation is faster and simpler because we don't need gradients.
@@ -13,7 +13,7 @@ Our implementation is faster and simpler because we don't need gradients.
 Key Features:
 - Dual-Stream Architecture (Transformer + Bottleneck)
 - Gated Fusion mechanism (V4 innovation)
-- Saliency Map-enhanced features (activation magnitude-based)
+- Density Attention Map-enhanced features (activation magnitude-based)
 - Graph Neural Networks
 - Transformer aggregation
 
@@ -78,7 +78,7 @@ Author: {__author__}
 License: {__license__}
 
 ⚠️  IMPORTANT NAMING CLARIFICATION:
-   This package uses SALIENCY MAPS (activation magnitude-based),
+   This package uses VOXEL-CLUSTER DENSITY ATTENTION (activation magnitude-based),
    NOT GradCAM (gradient-based)!
    
    Why? Because we don't need gradients for feature weighting.
@@ -87,7 +87,7 @@ License: {__license__}
 Features:
   • Dual-Stream Architecture
   • Gated Fusion (V4 innovation)
-  • Saliency Map Enhancement
+  • Density Attention Enhancement
   • Graph Neural Networks
   • Transformer Aggregation
 

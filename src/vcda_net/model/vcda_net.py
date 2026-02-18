@@ -54,11 +54,11 @@ from .components import (
 
 class VCDANet(nn.Module):
     """
-    Hybrid model with Saliency Map enhanced features
+    VCDA-Net model with Density Attention Map enhanced features
     
     For each of 32 feature maps:
     1. Original path: FeatureMap → ResNet → 256-dim
-    2. SaliencyMap path: FeatureMap → SaliencyMap → TopK coords → Gaussian matrix → ResNet → 256-dim
+    2. Density Attention path: FeatureMap → DensityMap → TopK coords → Gaussian matrix → ResNet → 256-dim
     3. Concatenate: 256 + 256 = 512-dim per region
     4. Build graph with 512-dim nodes
     """
@@ -74,7 +74,7 @@ class VCDANet(nn.Module):
         embedding_dim: int = 256,
         resnet_depth: str = 'resnet18',
         
-        # Saliency Map
+        # Density Attention Map
         top_k: int = 128,
         sigma: float = 10.0,
         matrix_resize: int = 64,  # Resize KxK to 64x64 for ResNet
@@ -114,7 +114,7 @@ class VCDANet(nn.Module):
             dropout=dropout
         )
         
-        # SaliencyMap path: ResNet for Gaussian matrices
+        # Density Attention path: ResNet for Gaussian matrices
         self.resnet_matrices = MatrixResNetEncoder(
             resnet_depth=resnet_depth,
             embedding_dim=embedding_dim,
@@ -195,7 +195,7 @@ class VCDANet(nn.Module):
         """
         Compute importance-weighted feature matrices for all channels
         
-        Uses feature magnitude as importance weights (NOT Saliency Map gradients).
+        Uses feature magnitude as importance weights (NOT Gradient-based Saliency).
         This simplified approach avoids backward passes during training.
         
         Args:

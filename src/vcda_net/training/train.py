@@ -1,8 +1,8 @@
 """
-Training Script for Saliency Map Enhanced Hybrid Model
+Training Script for Voxel Cluster Density Attention Network (VCDA-Net)
 
 This script trains the VCDANet model with:
-- Dual-path features: Original (256) + Saliency Map (256) = 512-dim
+- Dual-path features: Original (256) + Density Attention Map (256) = 512-dim
 - Per-channel activation magnitude-based density attention maps (NO gradients!)
 - Top-K voxel extraction (K=128)
 - Gaussian distance matrix encoding
@@ -21,7 +21,7 @@ Usage:
 
 Author: Anonymous
 Date: 2026-02-15
-Version: 4.0.2 (Saliency Map - renamed from GradCAM for accuracy)
+Version: 4.0.2 (VCDA-Net)
 """
 
 import sys
@@ -394,7 +394,7 @@ def plot_training_curves(history, save_path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Train Saliency Map Enhanced Model')
+    parser = argparse.ArgumentParser(description='Train VCDA-Net Model')
     
     # Data
     parser.add_argument('--data_dir', type=str, required=True,
@@ -421,7 +421,7 @@ def main():
     parser.add_argument('--unfreeze_unet_after_epoch', type=int, default=0,
                        help='Unfreeze UNet after this epoch (0=unfreeze from start, -1=keep frozen)')
     
-    # Saliency Map
+    # Density Attention
     parser.add_argument('--top_k', type=int, default=128,
                        help='Number of top voxels from density attention map')
     parser.add_argument('--sigma', type=float, default=10.0,
@@ -501,14 +501,14 @@ def main():
     writer = SummaryWriter(output_dir / 'tensorboard')
     
     print("="*70)
-    print("Training Saliency Map Enhanced Hybrid Model (V4)")
+    print("Training Voxel Cluster Density Attention Network (VCDA-Net)")
     print("="*70)
     print(f"Output directory: {output_dir}")
     print(f"Device: {device}")
     print(f"Top-K voxels: {args.top_k}")
     print(f"Gaussian sigma: {args.sigma}")
     print(f"Matrix resize: {args.matrix_resize}")
-    print("⚠️  Note: Using activation magnitude-based density attention maps (NOT GradCAM)")
+    print("⚠️  Note: Using VCDA mechanism (activation magnitude-based density attention)")
     print("="*70)
     
     # Save config

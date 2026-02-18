@@ -36,8 +36,12 @@ echo ""
 
 # Paths
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-DATA_DIR="/media/devin/WORK/devin/tien/synthesis_data/healthy_brain_1710/ABIDE_ADNI_IXI_OASIS_PPMI_Turboprep_balanced_1710"
-METADATA_CSV="/media/devin/WORK/devin/tien/synthesis_data/healthy_brain_1710/ABIDE_ADNI_IXI_OASIS_PPMI_Turboprep_balanced_1710_metadata.csv"
+# DATA_DIR="/path/to/your/dataset"
+# METADATA_CSV="/path/to/your/metadata.csv"
+
+# Default to environment variables or placeholders
+DATA_DIR="${VCDA_DATA_DIR:-/path/to/dataset}"
+METADATA_CSV="${VCDA_METADATA_CSV:-/path/to/metadata.csv}"
 UNET_CHECKPOINT="${SCRIPT_DIR}/src/vcda_net/checkpoints/IXI_3dunet_best_model.pth"
 
 # Training parameters
@@ -183,7 +187,8 @@ cd "$SCRIPT_DIR"
 
 # Activate conda base environment (where PyTorch is installed)
 echo "Activating conda environment..."
-source ~/devin/programs/anaconda3/bin/activate base
+# source ~/anaconda3/bin/activate base
+# OR ensure your environment is already active before running this script
 # conda activate base
 
 echo "Python: $(which python)"

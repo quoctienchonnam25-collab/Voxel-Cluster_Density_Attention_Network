@@ -93,7 +93,7 @@ echo ""
 # ==============================================================================
 
 echo "Activating conda environment..."
-source ~/devin/programs/anaconda3/bin/activate base
+# source ~/anaconda3/bin/activate base
 
 echo "Python: $(which python)"
 echo "Python version: $(python --version)"

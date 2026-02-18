@@ -7,7 +7,7 @@ VCDA-Net model for use in regional predictor training.
 
 Features are extracted from the features_concat layer which combines:
 - Original feature path (256-dim)
-- Saliency map path (256-dim)
+- Density Attention map path (256-dim)
 = 512-dim per region × 32 regions
 
 Author: Anonymous
@@ -153,7 +153,7 @@ class RegionalFeatureExtractor:
         
         print(f"\nExtracting regional features...")
         print(f"  This will extract {num_regions} feature vectors per sample")
-        print(f"  Each vector has 512 dimensions (256 original + 256 saliency)")
+        print(f"  Each vector has 512 dimensions (256 original + 256 density attn)")
         
         all_features = []
         all_metadata = []

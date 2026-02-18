@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-Setup script for Hybrid Saliency Enhanced V4 Package
-Brain Age Prediction with Saliency Map-Enhanced Features
+Setup script for Voxel Cluster Density Attention Network (VCDA-Net) Package
+Brain Age Prediction with Density Attention-Enhanced Features
 
 ⚠️ IMPORTANT: This package uses SALIENCY MAPS, not GradCAM!
 """
@@ -20,20 +20,20 @@ requirements = (this_directory / "requirements.txt").read_text(encoding='utf-8')
 requirements = [req.strip() for req in requirements if req.strip() and not req.startswith('#')]
 
 setup(
-    name="hybrid-saliency-v4",
+    name="vcda-net",
     version="4.0.2",
     author="Anonymous",
     author_email="anonymous@review.com",
-    description="Hybrid Saliency Enhanced V4 - Brain Age Prediction with Saliency Map-Enhanced Features",
+    description="Voxel Cluster Density Attention Network (VCDA-Net) - Brain Age Prediction with Density Attention-Enhanced Features",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://anonymous.review/hybrid-saliency-v4",
+    url="https://anonymous.review/vcda-net",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     
     # Package data - include model checkpoints and configs
     package_data={
-        'hybrid_saliency_v4': [
+        'vcda_net': [
             'checkpoints/*.pth',
             'configs/*.yaml',
             'configs/*.json',
@@ -50,8 +50,8 @@ setup(
     # Entry points for command-line scripts
     entry_points={
         'console_scripts': [
-            'hybrid-saliency-train=hybrid_saliency_v4.training.train:main',
-            'hybrid-saliency-predict=hybrid_saliency_v4.predict:main',
+            'vcda-net-train=vcda_net.training.train:main',
+            'vcda-net-predict=vcda_net.predict:main',
         ],
     },
     
@@ -74,7 +74,7 @@ setup(
         'brain age prediction',
         'medical imaging',
         'deep learning',
-        'saliency map',
+        'density attention map',
         'activation map',
         'graph neural networks',
         'transformer',
@@ -83,9 +83,9 @@ setup(
     
     # Project URLs
     project_urls={
-        'Documentation': 'https://anonymous.review/hybrid-saliency-v4/wiki',
-        'Source': 'https://anonymous.review/hybrid-saliency-v4',
-        'Bug Reports': 'https://anonymous.review/hybrid-saliency-v4/issues',
+        'Documentation': 'https://anonymous.review/vcda-net/wiki',
+        'Source': 'https://anonymous.review/vcda-net',
+        'Bug Reports': 'https://anonymous.review/vcda-net/issues',
     },
     
     # License

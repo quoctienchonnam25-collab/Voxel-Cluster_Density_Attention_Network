@@ -1,6 +1,6 @@
 # Package Data Directory
 
-This directory contains data files used by the Hybrid Saliency V4 package experiments.
+This directory contains data files used by the VCDA-Net package experiments.
 
 ## Structure
 
@@ -25,7 +25,7 @@ data/
 
 ### Features Directory (~74MB)
 
-**Source**: Extracted from ADNI AD/MCI cohort using Hybrid Saliency V4 model
+**Source**: Extracted from ADNI AD/MCI cohort using VCDA-Net model
 
 **Files**:
 - `regions/region_XX_features.npy`: Features for each of 32 brain regions
@@ -55,7 +55,7 @@ data/
 The experiment scripts automatically use these paths:
 
 ```bash
-cd src/hybrid_saliency_v4/experiments/ad_prediction
+cd src/vcda_net/experiments/ad_prediction
 bash run_experiment.sh
 ```
 
@@ -76,7 +76,7 @@ models_dir = package_root / "data/ad_prediction/models/models"
 
 ### Features
 - **Extracted**: 2026-01-XX
-- **Model**: Hybrid Saliency V4
+- **Model**: VCDA-Net
 - **Checkpoint**: `synthesis_v4_20260119_113843_topk512/checkpoints/best_model.pth`
 - **Dataset**: ADNI AD/MCI (584 samples)
 
@@ -156,7 +156,7 @@ The data files follow the same license as the package. See LICENSE file in packa
 ## References
 
 - **ADNI**: http://adni.loni.usc.edu/
-- **Hybrid Saliency V4**: See package documentation
+- **VCDA-Net**: See package documentation
 - **Regional Analysis**: See experiments/ad_prediction/README.md
 
 ## Notes

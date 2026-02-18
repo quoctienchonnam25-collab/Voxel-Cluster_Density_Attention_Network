@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Quick Test Training Script for Hybrid Saliency V4 Package
+Quick Test Training Script for VCDA-Net Package
 Tests 1 epoch to verify package functionality
 """
 
@@ -17,7 +17,7 @@ from sklearn.model_selection import train_test_split
 
 # Import from package
 sys.path.insert(0, str(Path(__file__).parent / 'src'))
-from hybrid_saliency_v4.model.hybrid_saliency_enhanced_v4 import HybridSaliencyEnhanced
+from vcda_net.model.vcda_net import VCDANet
 
 
 class QuickDataset(Dataset):
@@ -77,13 +77,13 @@ def test_training():
     """Test 1 epoch of training"""
     
     print("="*70)
-    print("HYBRID SALIENCY V4 - QUICK TEST TRAINING")
+    print("VCDA-NET - QUICK TEST TRAINING")
     print("="*70)
     
     # Paths
     data_dir = Path('/media/devin/WORK/devin/tien/synthesis_data/healthy_brain_1710/ABIDE_ADNI_IXI_OASIS_PPMI_Turboprep_balanced_1710')
     metadata_csv = Path('/media/devin/WORK/devin/tien/synthesis_data/healthy_brain_1710/ABIDE_ADNI_IXI_OASIS_PPMI_Turboprep_balanced_1710_metadata.csv')
-    unet_checkpoint = Path('/media/devin/WORK/devin/tien/src/brain_age_prediction/hybrid_saliency_v4_package/src/hybrid_saliency_v4/checkpoints/IXI_3dunet_best_model.pth')
+    unet_checkpoint = Path('/media/devin/WORK/devin/tien/src/brain_age_prediction/vcda_net_package/src/vcda_net/checkpoints/IXI_3dunet_best_model.pth')
     
     # Check paths
     if not data_dir.exists():
@@ -122,7 +122,7 @@ def test_training():
     
     # Model
     print("Creating model...")
-    model = HybridSaliencyEnhanced(
+    model = VCDANet(
         unet_checkpoint=str(unet_checkpoint),
         num_regions=32,
         embedding_dim=256,
@@ -257,7 +257,7 @@ def test_training():
     print("="*70)
     print("\nPackage is working correctly!")
     print("You can now run full training with:")
-    print("  python -m hybrid_saliency_v4.training.train \\")
+    print("  python -m vcda_net.training.train \\")
     print("    --data_dir <path> \\")
     print("    --metadata_csv <path> \\")
     print("    --unet_checkpoint <path> \\")

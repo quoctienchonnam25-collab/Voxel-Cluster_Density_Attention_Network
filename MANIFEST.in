@@ -11,10 +11,10 @@ include requirements.txt
 recursive-include scripts *.py *.sh
 
 # Include configs
-recursive-include src/hybrid_saliency_v4/configs *.yaml *.json
+recursive-include src/vcda_net/configs *.yaml *.json
 
 # Include checkpoints (optional - comment out if too large)
-# recursive-include src/hybrid_saliency_v4/checkpoints *.pth
+# recursive-include src/vcda_net/checkpoints *.pth
 
 # Exclude unnecessary files
 global-exclude __pycache__

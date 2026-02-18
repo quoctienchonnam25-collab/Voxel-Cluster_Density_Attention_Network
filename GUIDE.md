@@ -1,8 +1,8 @@
-# 📖 User Guide — Hybrid Saliency V4
+# 📖 User Guide — VCDA-Net
 
 **Brain Age Prediction with Saliency Maps and Gated Fusion**
 
-> Package: `hybrid-saliency-v4` · Version: `4.0.2` · Python ≥ 3.8
+> Package: `vcda-net` · Version: `4.0.2` · Python ≥ 3.8
 
 ---
 
@@ -28,7 +28,7 @@
 
 ## 1. Overview
 
-The **Hybrid Saliency V4** package provides a complete end-to-end pipeline for regional brain age prediction from 3D MRI scans.
+The **VCDA-Net** package provides a complete end-to-end pipeline for regional brain age prediction from 3D MRI scans.
 
 ### Key Features
 
@@ -66,7 +66,7 @@ GradCAM (NOT used):
 
 ```bash
 # Navigate to the package directory
-cd /path/to/hybrid_saliency_v4_package
+cd /path/to/vcda_net_package
 
 # Install in development mode (recommended)
 pip install -e .
@@ -78,11 +78,11 @@ pip install -r requirements.txt
 ### 2.3 Verify Installation
 
 ```python
-from hybrid_saliency_v4.model import HybridSaliencyEnhanced
+from vcda_net.model import VCDANet
 import torch
 
-model = HybridSaliencyEnhanced(
-    unet_checkpoint='src/hybrid_saliency_v4/checkpoints/IXI_3dunet_best_model.pth',
+model = VCDANet(
+    unet_checkpoint='src/vcda_net/checkpoints/IXI_3dunet_best_model.pth',
     num_regions=32,
     embedding_dim=256
 )
@@ -101,7 +101,7 @@ with torch.no_grad():
 If you did not install via `pip install -e .`, add the source directory manually:
 
 ```bash
-export PYTHONPATH="/path/to/hybrid_saliency_v4_package/src:$PYTHONPATH"
+export PYTHONPATH="/path/to/vcda_net_package/src:$PYTHONPATH"
 ```
 
 ---
@@ -109,7 +109,7 @@ export PYTHONPATH="/path/to/hybrid_saliency_v4_package/src:$PYTHONPATH"
 ## 3. Directory Structure
 
 ```
-hybrid_saliency_v4_package/
+vcda_net_package/
 │
 ├── 📄 README.md                        ← Technical overview (English)
 ├── 📄 GUIDE.md                         ← This file (comprehensive guide)
@@ -118,14 +118,14 @@ hybrid_saliency_v4_package/
 ├── 📄 pyproject.toml                   ← Package configuration
 ├── 📄 setup.py                         ← Build script
 │
-├── 🚀 train_saliency_v4.sh             ← Main model training script
+├── 🚀 train_vcda_net.sh             ← Main model training script
 │
 ├── src/
-│   └── hybrid_saliency_v4/
+│   └── vcda_net/
 │       ├── __init__.py
 │       │
 │       ├── model/                      ← Model architecture
-│       │   ├── hybrid_saliency_enhanced_v4.py   ← Main model
+│       │   ├── vcda_net.py   ← Main model
 │       │   └── components/             ← Sub-components (GNN, Transformer, ...)
 │       │
 │       ├── training/                   ← Training logic
@@ -149,8 +149,8 @@ hybrid_saliency_v4_package/
 │       └── checkpoints/
 │           └── IXI_3dunet_best_model.pth   ← Pretrained UNet
 │
-├── saliency_runs/                      ← Training outputs (auto-created)
-│   └── saliency_enhanced_YYYYMMDD_HHMMSS/
+├── vcda_runs/                      ← Training outputs (auto-created)
+│   └── vcda_net_YYYYMMDD_HHMMSS/
 │       └── checkpoints/
 │           └── best_model.pth          ← Best checkpoint
 │
@@ -172,8 +172,8 @@ hybrid_saliency_v4_package/
 │         │                                                       │
 │         ▼                                                       │
 │  [Step 0] Train the main model                                  │
-│         train_saliency_v4.sh                                    │
-│         → saliency_runs/.../best_model.pth                      │
+│         train_vcda_net.sh                                    │
+│         → vcda_runs/.../best_model.pth                      │
 │         │                                                       │
 │         ▼                                                       │
 │  [Step 1] Extract regional brain features                       │
@@ -198,7 +198,7 @@ hybrid_saliency_v4_package/
 
 ## 5. Step 0 — Train the Main Model
 
-> **Skip this step if you already have a checkpoint** in `saliency_runs/`.
+> **Skip this step if you already have a checkpoint** in `vcda_runs/`.
 
 ### 5.1 Prepare Data
 
@@ -216,20 +216,20 @@ sub002_T1w.nii.gz,62.1,F,ADNI,ADNI002
 
 ### 5.2 Edit the Training Script
 
-Open `train_saliency_v4.sh` and update the paths:
+Open `train_vcda_net.sh` and update the paths:
 
 ```bash
 # Edit these lines:
 DATA_DIR="/path/to/mri/directory"
 METADATA_CSV="/path/to/metadata.csv"
-UNET_CHECKPOINT="${SCRIPT_DIR}/src/hybrid_saliency_v4/checkpoints/IXI_3dunet_best_model.pth"
+UNET_CHECKPOINT="${SCRIPT_DIR}/src/vcda_net/checkpoints/IXI_3dunet_best_model.pth"
 ```
 
 ### 5.3 Run Training
 
 ```bash
-cd /path/to/hybrid_saliency_v4_package
-bash train_saliency_v4.sh
+cd /path/to/vcda_net_package
+bash train_vcda_net.sh
 ```
 
 ### 5.4 Key Training Parameters
@@ -247,8 +247,8 @@ bash train_saliency_v4.sh
 ### 5.5 Training Output
 
 ```
-saliency_runs/
-└── saliency_enhanced_20260216_011913/
+vcda_runs/
+└── vcda_net_20260216_011913/
     ├── checkpoints/
     │   ├── best_model.pth          ← Use this checkpoint for the pipeline
     │   └── last_model.pth
@@ -258,14 +258,14 @@ saliency_runs/
 
 Monitor training progress:
 ```bash
-tensorboard --logdir=saliency_runs
+tensorboard --logdir=vcda_runs
 ```
 
 ---
 
 ## 6. Step 1 — Extract Regional Features
 
-Script: `src/hybrid_saliency_v4/pipeline/extract_regional_features.py`
+Script: `src/vcda_net/pipeline/extract_regional_features.py`
 
 ### 6.1 How It Works
 
@@ -284,9 +284,9 @@ Save to .npy file
 ### 6.2 Run Feature Extraction
 
 ```bash
-python -m hybrid_saliency_v4.pipeline.extract_regional_features \
-    --checkpoint saliency_runs/saliency_enhanced_20260216_011913/checkpoints/best_model.pth \
-    --unet_checkpoint src/hybrid_saliency_v4/checkpoints/IXI_3dunet_best_model.pth \
+python -m vcda_net.pipeline.extract_regional_features \
+    --checkpoint vcda_runs/vcda_net_20260216_011913/checkpoints/best_model.pth \
+    --unet_checkpoint src/vcda_net/checkpoints/IXI_3dunet_best_model.pth \
     --data_dir /path/to/mri/directory \
     --metadata /path/to/metadata.csv \
     --output_dir pipeline_output/regional_features \
@@ -327,7 +327,7 @@ pipeline_output/regional_features/
 
 ## 7. Step 2 — Train Regional Predictors
 
-Script: `src/hybrid_saliency_v4/pipeline/train_regional_predictors.py`
+Script: `src/vcda_net/pipeline/train_regional_predictors.py`
 
 ### 7.1 How It Works
 
@@ -346,7 +346,7 @@ Save 32 model .pkl files + bias_params.json
 ### 7.2 Run Training
 
 ```bash
-python -m hybrid_saliency_v4.pipeline.train_regional_predictors \
+python -m vcda_net.pipeline.train_regional_predictors \
     --features_dir pipeline_output/regional_features \
     --output_dir pipeline_output/regional_predictors \
     --alpha 1.0 \
@@ -412,7 +412,7 @@ print(f"Best region: {best_region['region_idx']} (MAE={best_region['mae_test']:.
 
 ## 8. Step 3 — Generate Predictions on New Data
 
-Script: `src/hybrid_saliency_v4/pipeline/generate_predictions.py`
+Script: `src/vcda_net/pipeline/generate_predictions.py`
 
 ### 8.1 Prerequisites
 
@@ -423,15 +423,15 @@ Script: `src/hybrid_saliency_v4/pipeline/generate_predictions.py`
 
 ```bash
 # Step 1: Extract features for new data (e.g. AD patients)
-python -m hybrid_saliency_v4.pipeline.extract_regional_features \
-    --checkpoint saliency_runs/saliency_enhanced_20260216_011913/checkpoints/best_model.pth \
-    --unet_checkpoint src/hybrid_saliency_v4/checkpoints/IXI_3dunet_best_model.pth \
+python -m vcda_net.pipeline.extract_regional_features \
+    --checkpoint vcda_runs/vcda_net_20260216_011913/checkpoints/best_model.pth \
+    --unet_checkpoint src/vcda_net/checkpoints/IXI_3dunet_best_model.pth \
     --data_dir /path/to/new/data \
     --metadata /path/to/new_metadata.csv \
     --output_dir pipeline_output/new_data_features
 
 # Step 2: Generate predictions
-python -m hybrid_saliency_v4.pipeline.generate_predictions \
+python -m vcda_net.pipeline.generate_predictions \
     --features_dir pipeline_output/new_data_features/regions \
     --metadata_file pipeline_output/new_data_features/metadata.csv \
     --models_dir pipeline_output/regional_predictors/models \
@@ -474,7 +474,7 @@ subject_id | age | region_00_raw | region_00_corrected | ... | ensemble_mean | e
 
 ## 9. Run the Full Pipeline with One Command
 
-Script: `src/hybrid_saliency_v4/pipeline/run_complete_pipeline.sh`
+Script: `src/vcda_net/pipeline/run_complete_pipeline.sh`
 
 ### 9.1 Configure the Script
 
@@ -482,10 +482,10 @@ Open the file and edit the CONFIGURATION section:
 
 ```bash
 # Open the file
-nano src/hybrid_saliency_v4/pipeline/run_complete_pipeline.sh
+nano src/vcda_net/pipeline/run_complete_pipeline.sh
 
 # Edit these lines:
-CHECKPOINT="${PACKAGE_ROOT}/saliency_runs/saliency_enhanced_20260216_011913/checkpoints/best_model.pth"
+CHECKPOINT="${PACKAGE_ROOT}/vcda_runs/vcda_net_20260216_011913/checkpoints/best_model.pth"
 UNET_CHECKPOINT="${PACKAGE_ROOT}/unet_checkpoint/IXI_3dunet_best_model.pth"
 DATA_DIR="/path/to/mri/directory"
 METADATA_CSV="/path/to/metadata.csv"
@@ -494,7 +494,7 @@ METADATA_CSV="/path/to/metadata.csv"
 ### 9.2 Run the Pipeline
 
 ```bash
-cd src/hybrid_saliency_v4/pipeline
+cd src/vcda_net/pipeline
 bash run_complete_pipeline.sh
 ```
 
@@ -722,16 +722,16 @@ BATCH_SIZE=2
 ### ❌ Import Error: Module Not Found
 
 ```
-ModuleNotFoundError: No module named 'hybrid_saliency_v4'
+ModuleNotFoundError: No module named 'vcda_net'
 ```
 
 **Solution:**
 ```bash
 # Add src to PYTHONPATH
-export PYTHONPATH="/path/to/hybrid_saliency_v4_package/src:$PYTHONPATH"
+export PYTHONPATH="/path/to/vcda_net_package/src:$PYTHONPATH"
 
 # Or install the package
-pip install -e /path/to/hybrid_saliency_v4_package
+pip install -e /path/to/vcda_net_package
 ```
 
 ### ❌ Hook Not Capturing Features
@@ -780,7 +780,7 @@ RuntimeError: Error(s) in loading state_dict
 ```
 
 **Solution:**
-- Make sure you are using the correct Hybrid Saliency V4 checkpoint (not V3/GradCAM)
+- Make sure you are using the correct VCDA-Net checkpoint (not V3/GradCAM)
 - Inspect the config stored in the checkpoint:
 
 ```python
@@ -802,7 +802,7 @@ Update the conda path in the scripts:
 which conda
 conda info --base
 
-# Edit run_complete_pipeline.sh and train_saliency_v4.sh
+# Edit run_complete_pipeline.sh and train_vcda_net.sh
 source /correct/path/to/anaconda3/bin/activate base
 ```
 
@@ -815,17 +815,17 @@ source /correct/path/to/anaconda3/bin/activate base
 ```bash
 # Copy models to the experiments directory
 cp -r pipeline_output/regional_predictors/* \
-    src/hybrid_saliency_v4/experiments/ad_prediction/data/models/
+    src/vcda_net/experiments/ad_prediction/data/models/
 
 # Run the AD prediction experiment
-cd src/hybrid_saliency_v4/experiments/ad_prediction
+cd src/vcda_net/experiments/ad_prediction
 bash run_experiment.sh
 ```
 
 ### 15.2 Use in Python
 
 ```python
-from hybrid_saliency_v4.experiments.ad_prediction.predict_regional_brain_age import (
+from vcda_net.experiments.ad_prediction.predict_regional_brain_age import (
     RegionalBrainAgePredictor
 )
 
@@ -868,8 +868,8 @@ print(predictions.groupby('dataset')['BAG'].agg(['mean', 'std']))
 
 ## 📝 Important Notes
 
-1. **Default checkpoint**: `saliency_runs/saliency_enhanced_20260216_011913/checkpoints/best_model.pth`
-2. **UNet checkpoint**: `src/hybrid_saliency_v4/checkpoints/IXI_3dunet_best_model.pth` (pretrained on the IXI dataset)
+1. **Default checkpoint**: `vcda_runs/vcda_net_20260216_011913/checkpoints/best_model.pth`
+2. **UNet checkpoint**: `src/vcda_net/checkpoints/IXI_3dunet_best_model.pth` (pretrained on the IXI dataset)
 3. **Training data for regional predictors**: Use healthy controls (not patients) to ensure accurate bias correction
 4. **Reproducibility**: Always use `--random_seed 42` for consistent results
 5. **Ensemble**: The final prediction is the mean of all 32 regional predictions, not any single region
@@ -879,8 +879,8 @@ print(predictions.groupby('dataset')['BAG'].agg(['mean', 'std']))
 ## 🔗 Related Documentation
 
 - `README.md` — Technical overview (English)
-- `src/hybrid_saliency_v4/pipeline/README.md` — Detailed pipeline documentation
-- `src/hybrid_saliency_v4/pipeline/QUICK_START.md` — Quick start guide
+- `src/vcda_net/pipeline/README.md` — Detailed pipeline documentation
+- `src/vcda_net/pipeline/QUICK_START.md` — Quick start guide
 - `CHANGELOG.md` — Version history
 - `TRAINING_SCRIPTS_README.md` — Training script guide
 

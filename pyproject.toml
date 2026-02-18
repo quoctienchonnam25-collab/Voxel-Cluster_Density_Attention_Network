@@ -3,9 +3,9 @@ requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "hybrid-saliency-v4"
+name = "vcda-net"
 version = "4.0.2"
-description = "Hybrid Saliency Enhanced V4 - Brain Age Prediction with Saliency Map-Enhanced Features"
+description = "Voxel Cluster Density Attention Network (VCDA-Net) - Brain Age Prediction with Density Attention-Enhanced Features"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
@@ -16,7 +16,7 @@ keywords = [
     "brain age prediction",
     "medical imaging", 
     "deep learning",
-    "saliency map",
+    "density attention map",
     "activation map",
     "graph neural networks",
     "transformer",
@@ -57,14 +57,14 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://anonymous.review/hybrid-saliency-v4"
-Documentation = "https://anonymous.review/hybrid-saliency-v4/wiki"
-Repository = "https://anonymous.review/hybrid-saliency-v4"
-"Bug Tracker" = "https://anonymous.review/hybrid-saliency-v4/issues"
+Homepage = "https://anonymous.review/vcda-net"
+Documentation = "https://anonymous.review/vcda-net/wiki"
+Repository = "https://anonymous.review/vcda-net"
+"Bug Tracker" = "https://anonymous.review/vcda-net/issues"
 
 [project.scripts]
-hybrid-saliency-train = "hybrid_saliency_v4.training.train:main"
-hybrid-saliency-predict = "hybrid_saliency_v4.predict:main"
+vcda-net-train = "vcda_net.training.train:main"
+vcda-net-predict = "vcda_net.predict:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -73,7 +73,7 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 [tool.setuptools.package-data]
-hybrid_saliency_v4 = [
+vcda_net = [
     "checkpoints/*.pth",
     "configs/*.yaml",
     "configs/*.json",
